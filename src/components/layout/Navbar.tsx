@@ -2,13 +2,12 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useTheme } from "next-themes";
-import { Moon, Sun, Menu, X } from "lucide-react";
+import { Moon, Sun } from "lucide-react";
 import Image from "next/image";
 
 export default function Navbar() {
   const { theme, setTheme, resolvedTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
-  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => setMounted(true), []);
 
@@ -23,6 +22,7 @@ export default function Navbar() {
 
         {/* Desktop Navigation - Now aligned RIGHT */}
         <div className="hidden md:flex space-x-6 ml-auto">
+          <Link href="/about" className="text-gray-700 dark:text-gray-300 hover:text-blue-500">About</Link>
           <Link href="/experience" className="text-gray-700 dark:text-gray-300 hover:text-blue-500">Experience</Link>
           <Link href="/projects" className="text-gray-700 dark:text-gray-300 hover:text-blue-500">Projects</Link>
           <Link href="/resume" className="text-gray-700 dark:text-gray-300 hover:text-blue-500">Resume</Link>
