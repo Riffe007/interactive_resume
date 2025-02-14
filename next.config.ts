@@ -1,8 +1,14 @@
+const isProd = process.env.NODE_ENV === 'production';
+
 const nextConfig = {
-  output: 'export',
-  basePath: '/diagram',
-  assetPrefix: '/diagram/',
   reactStrictMode: true,
+  ...(isProd
+    ? {
+        output: 'export',
+        basePath: '/Interactive-Resume',
+        assetPrefix: '/Interactive-Resume/',
+      }
+    : {}),
 };
 
 export default nextConfig;

@@ -1,29 +1,32 @@
 // src/pages/index.tsx
-import React from 'react';
-import Layout from '@/components/Layout';
-import Link from 'next/link';
+import Head from 'next/head';
+import Navbar from '@/components/layout/Navbar';
+import Hero from '@/components/layout/Hero';
+import ProjectsSection from '@/components/home/ProjectSection';
+import TimelineSection from '@/components/home/TimelineSection';
+import SocialProof from '@/components/home/SocialProof';
+import Footer from '@/components/layout/Footer';
 
-const HomePage: React.FC = () => {
+export default function Home() {
   return (
-    <Layout>
-      <div className="container mx-auto text-center py-10">
-        <h1 className="text-5xl font-bold mb-6">
-          Welcome to Diagrams
-        </h1>
-        <p className="text-xl mb-8">
-          Explore animated diagrams showcasing our platform’s.
-        </p>
-        <div>
-          <Link
-            href="/diagrams"
-            className="px-6 py-3 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors"
-          >
-            View Diagram
-          </Link>
-        </div>
-      </div>
-    </Layout>
-  );
-};
+    <>
+      <Head>
+        <title>Timothy Riffe | Interactive Resume</title>
+        <meta name="description" content="AI, Finance, and Business Development Professional" />
+      </Head>
 
-export default HomePage;
+      <div className="flex flex-col min-h-screen bg-lightBg dark:bg-darkBg transition-colors">
+        <Navbar />
+        <main className="flex-grow">
+          <Hero />
+          <div className="container mx-auto px-6 py-12 space-y-16">
+            <ProjectsSection />
+            <TimelineSection />
+            <SocialProof />
+          </div>
+        </main>
+        <Footer />
+      </div>
+    </>
+  );
+}
