@@ -12,6 +12,7 @@
   "dependencies": {
     "@react-three/drei": "^9.121.5",
     "@react-three/fiber": "^8.17.14",
+    "autoplay": "^0.0.4",
     "framer-motion": "^12.4.2",
     "gsap": "^3.12.7",
     "leaflet": "^1.9.4",
@@ -22,12 +23,14 @@
     "react-dom": "^18.2.0",
     "react-flow-renderer": "^10.3.17",
     "react-icons": "^5.4.0",
-    "react-leaflet": "^5.0.0",
+    "react-leaflet": "^4.2.1",
+    "react-scroll-parallax": "^3.4.5",
     "swiper": "^11.2.3",
     "three": "^0.173.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
+    "@types/leaflet": "^1.9.16",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
