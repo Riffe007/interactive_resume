@@ -1,19 +1,22 @@
-// src/pages/about.tsx
 import React from 'react';
 import Head from 'next/head';
 import Image from 'next/image';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
-import { Parallax, ParallaxProvider } from 'react-scroll-parallax';
+import { ParallaxProvider } from 'react-scroll-parallax';
 import { motion } from 'framer-motion';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import SwiperCore from 'swiper';
-import Autoplay from 'swiper';
 import 'swiper/css';
+import dynamic from 'next/dynamic';
 
-import { MapContainer, TileLayer, Marker, Tooltip } from 'react-leaflet';
-import 'leaflet/dist/leaflet.css';
+// Dynamically import Parallax (client only)
+const Parallax = dynamic(
+  () => import('react-scroll-parallax').then((mod) => mod.Parallax),
+  { ssr: false }
+);
 
+// Dynamically import NoSSRMap (client only) from visualizations folder
+const NoSSRMap = dynamic(() => import('@/components/visualizations/NoSSRMap'), { ssr: false });
 
 export default function About() {
   const hobbies = [
@@ -21,12 +24,11 @@ export default function About() {
     { name: "Martial Arts", type: "image", src: "/images/misc/mcmap.jpg" },
     { name: "Boxing", type: "image", src: "/images/misc/Ali1.jpg" },
     { name: "Beach", type: "image", src: "/images/misc/beach_day.jpeg" },
-    { name: "Family Time", type: "carousel" }, // We'll render a carousel here
+    { name: "Family Time", type: "carousel" },
     { name: "Traveling", type: "video", src: "/videos/rome.mp4" },
   ];
 
   // Placeholder array for Family Time photos.
-  // Replace these paths with your actual images.
   const familyPhotos = [
     '/images/hobbies/family1.jpg',
     '/images/hobbies/family2.jpg',
@@ -43,7 +45,7 @@ export default function About() {
     { name: "Thailand", coords: [13.7563, 100.5018], description: "Exotic landscapes with vibrant street food." },
   ];
 
-  // Workaround for TileLayer prop types.
+  // TileLayer props for the map
   const tileLayerProps: any = {
     url: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
     attribution:
@@ -121,7 +123,6 @@ export default function About() {
           className="py-16 text-center bg-fixed bg-cover bg-center"
           style={{ backgroundImage: "url('/images/misc/river.jpg')" }}
         >
-          {/* Overlay for readability */}
           <div className="bg-black bg-opacity-50 py-8">
             <h2 className="text-4xl font-bold text-white">Mission, Vision & Values</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto mt-8">
@@ -200,7 +201,7 @@ export default function About() {
           </div>
         </section>
 
-        {/* Interactive Travel Map using React-Leaflet */}
+        {/* Interactive Travel Map using NoSSRMap */}
         <section className="py-16 bg-gray-100 dark:bg-gray-800 text-center">
           <h2 className="text-4xl font-bold text-gray-900 dark:text-gray-100">
             Places I've Traveled
@@ -209,18 +210,7 @@ export default function About() {
             Some of my favorite places: Rome, Paris, Las Vegas, Central Coast of California, Houston, Chicago, Thailand.
           </p>
           <div className="mt-6 mx-auto" style={{ width: "90%", height: "500px" }}>
-            <MapContainer center={[20, 0]} zoom={2} style={{ height: "100%", width: "100%" }}>
-              <TileLayer {...tileLayerProps} />
-              {travelLocations.map((location, idx) => (
-                <Marker key={idx} position={location.coords}>
-                  <Tooltip offset={[0, -20]} opacity={1}>
-                    <div className="text-sm">
-                      <strong>{location.name}</strong>: {location.description}
-                    </div>
-                  </Tooltip>
-                </Marker>
-              ))}
-            </MapContainer>
+            <NoSSRMap travelLocations={travelLocations} tileLayerProps={tileLayerProps} />
           </div>
         </section>
 
