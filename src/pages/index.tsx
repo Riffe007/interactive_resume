@@ -66,8 +66,7 @@ export default function Home() {
             {/* Social Proof Section (Trusted by Industry Leaders) */}
             {/* Using the same format as about.tsx */}
             <section
-              className="py-16 text-center bg-fixed bg-cover bg-center relative w-full"
-              style={{ backgroundImage: "url('/images/misc/industry-bg.jpg')" }}
+              className="py-16 text-center bg-fixed bg-cover bg-center relative w-full industry-bg"
             >
               <div className="relative z-10">
                 <SocialProof />

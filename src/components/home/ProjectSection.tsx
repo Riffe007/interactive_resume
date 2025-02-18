@@ -3,9 +3,9 @@ import { motion } from 'framer-motion';
 import Link from 'next/link';
 
 const projects = [
-  { title: 'AI Resume Generator', description: 'Generate custom resumes using AI & NLP.', link: '/projects/ai-resume' },
-  { title: 'AI Chatbot', description: 'Interactive chatbot powered by fine-tuned LLM.', link: '/projects/chatbot' },
-  { title: 'Stock Prediction Model', description: 'ML model for financial market predictions.', link: '/projects/stock-model' }
+  { title: 'Chat Bot', description: 'A custom chatbot.', link: '/chat' },
+  { title: 'AI Assistant', description: 'Interactive chatbot powered by fine-tuned LLM.', link: '/paula-assistant' },
+  { title: 'Crypto Prediction Model', description: 'ML model for crypto market predictions.', link: '/projects/crypto-model' }
 ];
 
 export default function ProjectsSection() {

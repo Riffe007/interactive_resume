@@ -3,10 +3,15 @@ import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { HiMenu, HiX } from 'react-icons/hi';
+import { useTheme } from 'next-themes';
+import { FiSun, FiMoon } from 'react-icons/fi';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const { theme, setTheme } = useTheme();
+
   const toggleMenu = () => setIsOpen((prev) => !prev);
+  const toggleTheme = () => setTheme(theme === 'dark' ? 'light' : 'dark');
 
   return (
     <nav className="bg-white dark:bg-gray-800 shadow">
@@ -44,10 +49,18 @@ export default function Navbar() {
             <Link href="/contact" className="ml-4 text-gray-700 dark:text-gray-300 hover:text-gray-900">
               Contact
             </Link>
+            {/* Optional: Desktop Dark Mode Toggle */}
+            <button
+              onClick={toggleTheme}
+              className="ml-4 text-gray-700 dark:text-gray-300 focus:outline-none"
+              title="Toggle Dark Mode"
+            >
+              {theme === 'dark' ? <FiSun size={20} /> : <FiMoon size={20} />}
+            </button>
           </div>
           {/* Mobile Hamburger Icon */}
           <div className="flex items-center md:hidden">
-            <button onClick={toggleMenu} className="text-gray-700 dark:text-gray-300 focus:outline-none">
+            <button onClick={toggleMenu} className="text-gray-700 dark:text-gray-300 focus:outline-none" title="Close Menu">
               {isOpen ? <HiX size={24} /> : <HiMenu size={24} />}
             </button>
           </div>
@@ -58,9 +71,19 @@ export default function Navbar() {
         <div className="md:hidden fixed inset-0 z-50 flex">
           <div className="absolute inset-0 bg-black opacity-50" onClick={toggleMenu} />
           <div className="relative bg-white dark:bg-gray-800 w-64 h-full p-4 transform transition-transform duration-300">
-            <button onClick={toggleMenu} className="mb-4 text-gray-700 dark:text-gray-300 focus:outline-none" aria-label="Close menu">
-              <HiX size={24} />
-            </button>
+            <div className="flex justify-between items-center mb-4">
+              <button onClick={toggleMenu} className="text-gray-700 dark:text-gray-300 focus:outline-none" title="Close Menu">
+                <HiX size={24} />
+              </button>
+              {/* Dark Mode Toggle in Mobile Menu */}
+              <button
+                onClick={toggleTheme}
+                className="text-gray-700 dark:text-gray-300 focus:outline-none"
+                title="Toggle Dark Mode"
+              >
+                {theme === 'dark' ? <FiSun size={20} /> : <FiMoon size={20} />}
+              </button>
+            </div>
             <nav className="flex flex-col space-y-4">
               <Link href="/about" onClick={toggleMenu} className="text-gray-700 dark:text-gray-300 hover:text-gray-900">
                 About
