@@ -4,7 +4,7 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 
 export default function Resume() {
-  // Backend API base URL (supports local & production)
+  // Backend API base URL (supports both local & production)
   const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "http://127.0.0.1:8000";
 
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
@@ -21,7 +21,10 @@ export default function Resume() {
 
   // Upload file & generate resume
   const handleUpload = async () => {
-    if (!selectedFile) return;
+    if (!selectedFile) {
+      setGeneratedMessage("❌ Please select a file before generating a resume.");
+      return;
+    }
 
     setIsUploading(true);
     setGeneratedMessage("");
@@ -110,7 +113,11 @@ export default function Resume() {
                   {isUploading ? "Uploading..." : "Generate Resume"}
                 </button>
               </div>
+
+              {/* Upload Status Messages */}
               {generatedMessage && <p className="mt-4 text-green-600 font-semibold">{generatedMessage}</p>}
+
+              {/* Download Button for Generated Resume */}
               {generatedPdfUrl && (
                 <div className="mt-4">
                   <a href={generatedPdfUrl} download className="bg-green-600 text-white py-3 px-6 rounded-lg shadow-md hover:bg-green-700 transition">
